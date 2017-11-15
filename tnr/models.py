@@ -8,8 +8,7 @@ class TNREvent(models.Model):
     name = models.CharField("Short Description", max_length=50, blank=True)
     desc = models.CharField("Long Description", max_length=200, blank=True)
     date = models.DateField(blank=True)
-    def __str__(self):
-        return "%s %s" % (self.name, self.date)
+
 
 
 class TNRLocation(models.Model):
@@ -23,23 +22,20 @@ class TNRLocation(models.Model):
     colony_zipcode      = models.CharField(max_length=10, blank=True)
     notes_private       = models.TextField("Public Notes", blank=True)
     notes_public        = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
-    def __str__(self):
-        return "%s %s" % (self.cp_name, self.colony_address01)
+
 
 
 class TNRLeg(models.Model):
     location    = models.ForeignKey(TNRLocation, on_delete=models.CASCADE)
     name        = models.CharField(max_length=50, blank=True)
     date        = models.DateTimeField(blank=True)
-    def __str__(self):
-        return "%s %s" % (self.name, self.date)
+
 
 
 class TNRRole(models.Model):
     leg   = models.ForeignKey(TNRLeg, on_delete=models.CASCADE)
     name  = models.CharField(max_length=50, blank=True)
-    def __str__(self):
-        return "%s" % (self.cp_name)
+
 
 
 class Person(models.Model):
@@ -47,8 +43,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=100, blank=True)
     last_name  = models.CharField(max_length=100, blank=True)
     email      = models.CharField(max_length=200, blank=True)
-    def __str__(self):
-        return "%s %s %s %s" % (self.first_name, self.last_name, self.email, self.telephone)
+
 
 
 class TNRApplication(models.Model):
@@ -154,5 +149,3 @@ class TNRApplication(models.Model):
         verbose_name="Application Status",
         blank=True)
 
-    def __str__(self):
-        return "%s %s %s %s %s" % (self.first_name, self.last_name, self.colony_street_address, self.cats_total. self.app_status)
