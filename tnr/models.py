@@ -52,17 +52,19 @@ class TNRApplication(models.Model):
 	CLOSED 		= 'C'
 	SELFTRAP 	= 'S'
 	PENDING		= 'P'
+	NEWCONTACT	= 'N'
 
 	APP_STATUS_CHOICES	= (
 		(BANNED, "Banned"),
 		(CLOSED, "Closed"),
 		(INPROGRESS, "In Progress"),
+		(NEWCONTACT, "New Contact"),
 		(OUTAREA, "Out of Area"),
 		(PENDING, "Pending"),
 		(SELFTRAP, "Self Trapping"),
 		)
 
-	app_status 				= models.CharField(max_length = 1, choices=APP_STATUS_CHOICES, default=PENDING)
+	app_status 				= models.CharField(max_length = 1, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
 	application_date		= models.DateTimeField(default=timezone.now)
 	first_name              = models.CharField(
         verbose_name='What is your first name?', 
