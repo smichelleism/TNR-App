@@ -20,8 +20,8 @@ class TNRLocation(models.Model):
     colony_address02    = models.CharField(max_length=200, blank=True)
     colony_city         = models.CharField(max_length=50, blank=True)
     colony_zipcode      = models.CharField(max_length=10, blank=True)
-    notes_private       = models.TextField("Public Notes", blank=True)
-    notes_public        = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
+    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
+    notes_public        = models.TextField("Public Notes", blank=True)
 
 
 
@@ -43,7 +43,6 @@ class Person(models.Model):
     first_name = models.CharField(max_length=100, blank=True)
     last_name  = models.CharField(max_length=100, blank=True)
     email      = models.CharField(max_length=200, blank=True)
-
 
 
 class TNRApplication(models.Model):
@@ -149,3 +148,5 @@ class TNRApplication(models.Model):
         verbose_name="Application Status",
         blank=True)
 
+class AppStatus(models.Model):
+	status 	= models.ForeignKey(TNRApplication)
