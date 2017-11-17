@@ -11,8 +11,11 @@ class TNREvent(models.Model):
 
 
 
+
+
+
+
 class TNRLocation(models.Model):
-    event               = models.ForeignKey(TNREvent, on_delete=models.CASCADE)
     cp_name             = models.CharField(max_length=200, blank=True)
     cp_email            = models.CharField(max_length=200, blank=True)
     cp_telephone        = models.CharField(max_length=200, blank=True)
@@ -20,8 +23,44 @@ class TNRLocation(models.Model):
     colony_address02    = models.CharField(max_length=200, blank=True)
     colony_city         = models.CharField(max_length=50, blank=True)
     colony_zipcode      = models.CharField(max_length=10, blank=True)
-    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
+    date_sched			= models.DateField(blank =True, default='2000-01-01')
     notes_public        = models.TextField("Public Notes", blank=True)
+    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
+
+
+
+class Trap(models.Model):
+	FEMALE 	= 'F'
+	MALE 	= 'M'
+	UNKNOWN = 'U'
+
+	GENDER_CHOICES = (
+		(FEMALE, "Female"),
+		(MALE, "Male"),
+		(UNKNOWN, 'Unknown')
+		)
+
+	INTAKE = 'I'
+	RELEASED = 'R'
+	DECEASED = 'D'
+	UNKNOWN = 'U'
+	OTHER = 'O'
+
+	STATUS_CHOICES = (
+		(INTAKE, 'Intake'),
+		(DECEASED, 'Deceased' ),
+		(RELEASED, 'Released to Colony'),
+		(OTHER, 'Other'),
+		(UNKNOWN, 'Unknown')
+		)
+
+	status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN)
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN)
+	trap_no	= models.CharField(max_length=20)
+	cat_desc = models.CharField(max_length=100)
+	location = models.ForeignKey(TNRLocation, on_delete=models.CASCADE, default=1)
+
+
 
 
 
@@ -163,3 +202,6 @@ class TNRApplication(models.Model):
 	notes                   = models.TextField(
         verbose_name='Private KB Notes about location.', 
         blank=True)
+	location_sched 			= models.ForeignKey(TNRLocation, default='2000-01-01',
+		verbose_name='When was this application scheduled for TNR',
+		blank=True)
