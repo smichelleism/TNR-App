@@ -4,84 +4,7 @@ from datetime import datetime
 
 # Create your models here.
 
-class TNREvent(models.Model):
-    name = models.CharField("Short Description", max_length=50, blank=True)
-    desc = models.CharField("Long Description", max_length=200, blank=True)
-    date = models.DateField(blank=True)
 
-
-
-
-
-
-
-class TNRLocation(models.Model):
-    cp_name             = models.CharField(max_length=200, blank=True)
-    cp_email            = models.CharField(max_length=200, blank=True)
-    cp_telephone        = models.CharField(max_length=200, blank=True)
-    colony_address01    = models.CharField(max_length=200, blank=True)
-    colony_address02    = models.CharField(max_length=200, blank=True)
-    colony_city         = models.CharField(max_length=50, blank=True)
-    colony_zipcode      = models.CharField(max_length=10, blank=True)
-    date_sched			= models.DateField(blank =True, default='2000-01-01')
-    notes_public        = models.TextField("Public Notes", blank=True)
-    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
-
-
-
-class Trap(models.Model):
-	FEMALE 	= 'F'
-	MALE 	= 'M'
-	UNKNOWN = 'U'
-
-	GENDER_CHOICES = (
-		(FEMALE, "Female"),
-		(MALE, "Male"),
-		(UNKNOWN, 'Unknown')
-		)
-
-	INTAKE = 'I'
-	RELEASED = 'R'
-	DECEASED = 'D'
-	UNKNOWN = 'U'
-	OTHER = 'O'
-
-	STATUS_CHOICES = (
-		(INTAKE, 'Intake'),
-		(DECEASED, 'Deceased' ),
-		(RELEASED, 'Released to Colony'),
-		(OTHER, 'Other'),
-		(UNKNOWN, 'Unknown')
-		)
-
-	status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN)
-	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN)
-	trap_no	= models.CharField(max_length=20)
-	cat_desc = models.CharField(max_length=100)
-	location = models.ForeignKey(TNRLocation, on_delete=models.CASCADE, default=1)
-
-
-
-
-
-class TNRLeg(models.Model):
-    location    = models.ForeignKey(TNRLocation, on_delete=models.CASCADE)
-    name        = models.CharField(max_length=50, blank=True)
-    date        = models.DateTimeField(blank=True)
-
-
-
-class TNRRole(models.Model):
-    leg   = models.ForeignKey(TNRLeg, on_delete=models.CASCADE)
-    name  = models.CharField(max_length=50, blank=True)
-
-
-
-class Person(models.Model):
-    role       = models.ForeignKey(TNRRole)
-    first_name = models.CharField(max_length=100, blank=True)
-    last_name  = models.CharField(max_length=100, blank=True)
-    email      = models.CharField(max_length=200, blank=True)
 
 
 class TNRApplication(models.Model):
@@ -189,11 +112,11 @@ class TNRApplication(models.Model):
         max_length=100, 
         blank=True)
 	cats_feeding            = models.CharField(
-        verbose_name='Who feeds the cats? What time are they normall fed (morning/evening)?', 
+        verbose_name='Who feeds the cats? What time are they normally fed (morning/evening)?', 
         max_length=200, 
         blank=True)
 	scheduling_issues       = models.CharField(
-        verbose_name='The community partner needs to be present to show us where the cats hang out. Any scheduling issues which might cause issues?', 
+        verbose_name='The community partner needs to be present to show us where the cats hang out. Are there any scheduling issues?', 
         max_length=200, 
         blank=True)
 	add_info                = models.TextField(
@@ -202,6 +125,77 @@ class TNRApplication(models.Model):
 	notes                   = models.TextField(
         verbose_name='Private KB Notes about location.', 
         blank=True)
-	location_sched 			= models.ForeignKey(TNRLocation, default='2000-01-01',
-		verbose_name='When was this application scheduled for TNR',
-		blank=True)
+
+
+
+class TNRLocation(models.Model):
+    cp_name             = models.CharField(max_length=200, blank=True)
+    cp_email            = models.CharField(max_length=200, blank=True)
+    cp_telephone        = models.CharField(max_length=200, blank=True)
+    colony_address01    = models.CharField(max_length=200, blank=True)
+    colony_address02    = models.CharField(max_length=200, blank=True)
+    colony_city         = models.CharField(max_length=50, blank=True)
+    colony_zipcode      = models.CharField(max_length=10, blank=True)
+    date_sched			= models.DateField(blank =True, default='2000-01-01')
+    notes_public        = models.TextField("Public Notes", blank=True)
+    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
+    application	 		= models.ForeignKey(TNRApplication, default=1)
+
+
+
+class Trap(models.Model):
+	FEMALE 	= 'F'
+	MALE 	= 'M'
+	UNKNOWN = 'U'
+
+	GENDER_CHOICES = (
+		(FEMALE, "Female"),
+		(MALE, "Male"),
+		(UNKNOWN, 'Unknown')
+		)
+
+	INTAKE = 'I'
+	RELEASED = 'R'
+	DECEASED = 'D'
+	UNKNOWN = 'U'
+	OTHER = 'O'
+
+	STATUS_CHOICES = (
+		(INTAKE, 'Intake'),
+		(DECEASED, 'Deceased' ),
+		(RELEASED, 'Released to Colony'),
+		(OTHER, 'Other'),
+		(UNKNOWN, 'Unknown')
+		)
+
+	status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN)
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN)
+	trap_no	= models.CharField(max_length=20)
+	cat_desc = models.CharField(max_length=100)
+	location = models.ForeignKey(TNRLocation, on_delete=models.CASCADE, default=1)
+
+
+class TNREvent(models.Model):
+    name = models.CharField("Short Description", max_length=50, blank=True)
+    desc = models.CharField("Long Description", max_length=200, blank=True)
+    date = models.DateField(blank=True)
+
+
+
+class TNRLeg(models.Model):
+    name        = models.CharField(max_length=50, blank=True)
+    date        = models.DateTimeField(blank=True)
+
+
+
+class TNRRole(models.Model):
+    leg   = models.ForeignKey(TNRLeg, on_delete=models.CASCADE)
+    name  = models.CharField(max_length=50, blank=True)
+
+
+
+class Person(models.Model):
+    role       = models.ForeignKey(TNRRole)
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name  = models.CharField(max_length=100, blank=True)
+    email      = models.CharField(max_length=200, blank=True)

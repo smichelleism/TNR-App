@@ -7,6 +7,10 @@ from .models import TNRApplication, TNRLocation, Trap
 class TrapInline(admin.TabularInline):
 	model = Trap
 
+class LocationInline(admin.TabularInline):
+	model = TNRLocation
+
+
 
 @admin.register(Trap)
 class TrapAdmin(admin.ModelAdmin):
@@ -37,4 +41,5 @@ class TNRApplicationAdmin(admin.ModelAdmin):
 	list_display = ('application_date', 'first_name', 'last_name', 'colony_street_address', 'cats_total', 'app_status')
 	search_fields = ['last_name', 'colony_street_address']
 	list_filter = ['application_date', 'app_status']
+	inlines = [LocationInline, ]
 	
