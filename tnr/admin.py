@@ -7,8 +7,9 @@ from .models import TNRApplication, TNRLocation, Trap
 class TrapInline(admin.TabularInline):
 	model = Trap
 
-class LocationInline(admin.TabularInline):
+class LocationInline(admin.StackedInline):
 	model = TNRLocation
+	extra = 0
 
 
 
