@@ -4,8 +4,8 @@ from .models import TNRApplication
 class TNRApplicationModelForm(forms.ModelForm):
 	class Meta:
 		model = TNRApplication
-		fields = ('last_name', 
-			'first_name', 
+		fields = ('first_name', 
+			'last_name', 
 			'email', 
 			'contact_street_address', 
 			'contact_city',  
