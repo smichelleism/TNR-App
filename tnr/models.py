@@ -127,6 +127,22 @@ class TNRApplication(models.Model):
         blank=True)
 
 
+	def __str__(self):
+		return self.last_name + ', ' + self.first_name
+
+
+
+
+class TNREvent(models.Model):
+    name = models.CharField("Short Description", max_length=50, blank=True)
+    desc = models.CharField("Long Description", max_length=200, blank=True)
+    date = models.DateField(blank=True)
+
+
+    def __str__(self):
+    	return self.name 
+
+
 
 class TNRLocation(models.Model):
     cp_name             = models.CharField(max_length=200, blank=True)
@@ -139,7 +155,8 @@ class TNRLocation(models.Model):
     date_sched			= models.DateField(blank =True, default='2000-01-01')
     notes_public        = models.TextField("Public Notes", blank=True)
     notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
-    application	 		= models.ForeignKey(TNRApplication, default=1)
+    application	 		= models.ForeignKey(TNRApplication, blank=True, null=True)
+    event				= models.ForeignKey(TNREvent, blank=True, null=True)
 
 
 
@@ -175,10 +192,6 @@ class Trap(models.Model):
 	location = models.ForeignKey(TNRLocation, on_delete=models.CASCADE, default=1)
 
 
-class TNREvent(models.Model):
-    name = models.CharField("Short Description", max_length=50, blank=True)
-    desc = models.CharField("Long Description", max_length=200, blank=True)
-    date = models.DateField(blank=True)
 
 
 

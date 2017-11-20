@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TNRApplication, TNRLocation, Trap
+from .models import TNRApplication, TNRLocation, Trap, TNREvent
 
 
 # Register your models here.
@@ -11,7 +11,16 @@ class LocationInline(admin.StackedInline):
 	model = TNRLocation
 	extra = 0
 
+class LocationInlineTab(admin.TabularInline):
+	model = TNRLocation
+	extra = 0
 
+
+
+@admin.register(TNREvent)
+class TNREventAdmin(admin.ModelAdmin):
+	list_display = ('date', 'name', 'desc')
+	inlines = [LocationInline, ]
 
 @admin.register(Trap)
 class TrapAdmin(admin.ModelAdmin):
