@@ -152,11 +152,14 @@ class TNRLocation(models.Model):
     colony_address02    = models.CharField(max_length=200, blank=True)
     colony_city         = models.CharField(max_length=50, blank=True)
     colony_zipcode      = models.CharField(max_length=10, blank=True)
-    date_sched			= models.DateField(blank =True, default='2000-01-01')
+    date_sched			= models.DateField(blank =True, null=True)
     notes_public        = models.TextField("Public Notes", blank=True)
     notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
     application	 		= models.ForeignKey(TNRApplication, blank=True, null=True)
-    event				= models.ForeignKey(TNREvent, blank=True, null=True)
+    event				= models.ForeignKey(TNREvent, blank=True, null=True)    
+
+    def __str__(self):
+    	return self.cp_name + '/' + self.colony_address01
 
 
 
@@ -189,7 +192,7 @@ class Trap(models.Model):
 	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN)
 	trap_no	= models.CharField(max_length=20)
 	cat_desc = models.CharField(max_length=100)
-	location = models.ForeignKey(TNRLocation, on_delete=models.CASCADE, default=1)
+	location = models.ForeignKey(TNRLocation, on_delete=models.CASCADE, blank=True, null=True)
 
 
 
