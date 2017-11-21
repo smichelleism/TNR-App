@@ -43,7 +43,6 @@ class TNRApplication(models.Model):
         blank=True)
 	contact_city            = models.CharField(
         verbose_name='What is your home city?', 
-        max_length=50, default="Los Angeles", 
         blank=True)
 	contact_state           = models.CharField(
         verbose_name='What state do you live in?',
@@ -72,8 +71,7 @@ class TNRApplication(models.Model):
         blank=True)
 	colony_city             = models.CharField(
         verbose_name='What city is the colony located?', 
-        max_length=50, 
-        default="Los Angeles", 
+        max_length=50,  
         blank=True)
 	colony_state            = models.CharField(
         max_length=2, 
