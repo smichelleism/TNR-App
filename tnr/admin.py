@@ -6,6 +6,7 @@ from .models import TNRApplication, TNRLocation, Trap, TNREvent
 
 class TrapInline(admin.TabularInline):
 	model = Trap
+	extra = 0
 
 class LocationInline(admin.StackedInline):
 	model = TNRLocation

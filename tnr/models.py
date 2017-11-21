@@ -43,6 +43,7 @@ class TNRApplication(models.Model):
         blank=True)
 	contact_city            = models.CharField(
         verbose_name='What is your home city?', 
+        max_length=50,  
         blank=True)
 	contact_state           = models.CharField(
         verbose_name='What state do you live in?',
@@ -169,7 +170,7 @@ class Trap(models.Model):
 	GENDER_CHOICES = (
 		(FEMALE, "Female"),
 		(MALE, "Male"),
-		(UNKNOWN, 'Unknown')
+		(UNKNOWN, 'Unknown'),
 		)
 
 	INTAKE = 'Itk'
@@ -183,14 +184,14 @@ class Trap(models.Model):
 		(DECEASED, 'Deceased' ),
 		(RELEASED, 'Released to Colony'),
 		(OTHER, 'Other'),
-		(UNKNOWN, 'Unknown')
+		(UNKNOWN, 'Unknown'),
 		)
 
-	status = models.CharField(max_length=3, choices=STATUS_CHOICES, default=UNKNOWN)
-	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN)
-	trap_no	= models.CharField(max_length=20)
-	cat_desc = models.CharField(max_length=100)
-	location = models.ForeignKey(TNRLocation, on_delete=models.CASCADE, blank=True, null=True)
+	status = models.CharField(max_length=3, choices=STATUS_CHOICES, default=UNKNOWN, blank=True, )
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN, blank=True, )
+	trap_no	= models.CharField(max_length=20, blank=True, )
+	cat_desc = models.CharField(max_length=100, blank=True, )
+	location = models.ForeignKey(TNRLocation, blank=True, null=True, )
 
 
 
