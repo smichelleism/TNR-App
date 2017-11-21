@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'kittybungalow.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'smichelleism.mysql.pythonanywhere-services.com',
+        'NAME': 'smichelleism$default',
         'USER': 'smichelleism',
         'PASSWORD': 'Gihwm7f-TF2tuw',
-        'HOST': 'localhost',
+        'HOST': 'smichelleism.mysql.pythonanywhere-services.com',
         'PORT': '',
     }
 }
