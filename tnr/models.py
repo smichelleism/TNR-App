@@ -8,13 +8,13 @@ from datetime import datetime
 
 
 class TNRApplication(models.Model):
-	BANNED 		= 'B'
-	INPROGRESS	= 'I'
-	OUTAREA		= 'O'
-	CLOSED 		= 'C'
-	SELFTRAP 	= 'S'
-	PENDING		= 'P'
-	NEWCONTACT	= 'N'
+	BANNED 		= 'Ban'
+	INPROGRESS	= 'Ipr'
+	OUTAREA		= 'Out'
+	CLOSED 		= 'Csd'
+	SELFTRAP 	= 'STr'
+	PENDING		= 'Pnd'
+	NEWCONTACT	= 'NCt'
 
 	APP_STATUS_CHOICES	= (
 		(BANNED, "Banned"),
@@ -26,7 +26,7 @@ class TNRApplication(models.Model):
 		(SELFTRAP, "Self Trapping"),
 		)
 
-	app_status 				= models.CharField(max_length = 1, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
+	app_status 				= models.CharField(max_length = 3, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
 	application_date		= models.DateTimeField(default=timezone.now)
 	first_name              = models.CharField(
         verbose_name='What is your first name?', 
@@ -174,11 +174,11 @@ class Trap(models.Model):
 		(UNKNOWN, 'Unknown')
 		)
 
-	INTAKE = 'I'
-	RELEASED = 'R'
-	DECEASED = 'D'
-	UNKNOWN = 'U'
-	OTHER = 'O'
+	INTAKE = 'Itk'
+	RELEASED = 'Rel'
+	DECEASED = 'Dec'
+	UNKNOWN = 'Unk'
+	OTHER = 'Oth'
 
 	STATUS_CHOICES = (
 		(INTAKE, 'Intake'),
@@ -188,7 +188,7 @@ class Trap(models.Model):
 		(UNKNOWN, 'Unknown')
 		)
 
-	status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN)
+	status = models.CharField(max_length=3, choices=STATUS_CHOICES, default=UNKNOWN)
 	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN)
 	trap_no	= models.CharField(max_length=20)
 	cat_desc = models.CharField(max_length=100)
