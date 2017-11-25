@@ -40,90 +40,90 @@ class TNRApplication(models.Model):
 	contact_street_address  = models.CharField(
         verbose_name='What is your home street address?', 
         max_length=200, 
-        blank=True)
+        blank=True, null=True)
 	contact_city            = models.CharField(
         verbose_name='What is your home city?', 
         max_length=50,  
-        blank=True)
+        blank=True, null=True)
 	contact_state           = models.CharField(
         verbose_name='What state do you live in?',
         max_length=2, 
         default="CA", 
-        blank=True)
+        blank=True, null=True)
 	contact_zipcode         = models.CharField(
         verbose_name='What is your home zip code?', 
         max_length=10, 
-        blank=True)
+        blank=True, null=True)
 	contact_phone_cell		= models.CharField(
         verbose_name='What is your cell phone number?', 
         max_length=20, 
-        blank=True)
+        blank=True, null=True)
 	contact_phone_land		= models.CharField(
         verbose_name='What is your home telephone number?', 
         max_length=20, 
-        blank=True)
+        blank=True, null=True)
 	colony_street_address   = models.CharField(
         verbose_name='What is the street address for the colony?', 
         max_length=200, 
-        blank=True)
+        blank=True, null=True)
 	colony_cross_streets    = models.CharField(
         "What are the major cross streets nearest the colony?",
         max_length=200, 
-        blank=True)
+        blank=True, null=True)
 	colony_city             = models.CharField(
         verbose_name='What city is the colony located?', 
         max_length=50,  
-        blank=True)
+        blank=True, null=True)
 	colony_state            = models.CharField(
         max_length=2, 
         default="CA", 
-        blank=True)
+        blank=True, null=True)
 	colony_zipcode          = models.CharField(
         verbose_name='What is the zip code where the colony is located?', 
         max_length=10, 
-        blank=True)
+        blank=True, null=True)
 	transportation          = models.CharField(
         verbose_name='Do you have a car or other transportation to help with taking the cats to/from the vet?', 
         max_length=20,
-        blank=True)
+        blank=True, null=True)
 	location_type           = models.CharField(
         verbose_name='Please describe the colony location. Is it a business/home/school/field/or ...', 
-        max_length=10, 
-        blank=True)
+        max_length=100, 
+        blank=True, null=True)
 	cats_total              = models.CharField(
         verbose_name='How many cats total (including kittens)?', 
         max_length=50, 
-        blank=True)
+        blank=True, null=True)
 	kittens_total           = models.CharField(
         verbose_name='How many kittens are there? What is their approximate age?', 
         max_length=50, 
-        blank=True)
+        blank=True, null=True)
 	cats_friendly           = models.CharField(
         verbose_name='Are any of the cats friendly? Can you touch them?', 
         max_length=100, 
-        blank=True)
+        blank=True, null=True)
 	cats_pregnant           = models.CharField(
         verbose_name='Do you know if any of the cats are currently pregnant?', 
         max_length=100, 
-        blank=True)
+        blank=True, null=True)
 	cats_fixed              = models.CharField(
         verbose_name='Do you know if any of the cats are already fixed?', 
         max_length=100, 
-        blank=True)
+        blank=True, null=True)
 	cats_feeding            = models.CharField(
         verbose_name='Who feeds the cats? What time are they normally fed (morning/evening)?', 
         max_length=200, 
-        blank=True)
+        blank=True, null=True)
 	scheduling_issues       = models.CharField(
         verbose_name='The community partner needs to be present to show us where the cats hang out. Are there any scheduling issues?', 
         max_length=200, 
-        blank=True)
+        blank=True, null=True)
 	add_info                = models.TextField(
         verbose_name='Is there any additional information which would helpful?', 
-        blank=True)
+        blank=True, null=True)
 	notes                   = models.TextField(
         verbose_name='Private KB Notes about location.', 
-        blank=True)
+        blank=True, null=True)
 
 
 	def __str__(self):
@@ -133,9 +133,9 @@ class TNRApplication(models.Model):
 
 
 class TNREvent(models.Model):
-    name = models.CharField("Short Description", max_length=50, blank=True)
-    desc = models.CharField("Long Description", max_length=200, blank=True)
-    date = models.DateField(blank=True)
+    name = models.CharField("Short Description", max_length=50, blank=True, null=True)
+    desc = models.CharField("Long Description", max_length=200, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
 
 
     def __str__(self):
@@ -144,21 +144,21 @@ class TNREvent(models.Model):
 
 
 class TNRLocation(models.Model):
-    cp_name             = models.CharField(max_length=200, blank=True)
-    cp_email            = models.CharField(max_length=200, blank=True)
-    cp_telephone        = models.CharField(max_length=200, blank=True)
-    colony_address01    = models.CharField(max_length=200, blank=True)
-    colony_address02    = models.CharField(max_length=200, blank=True)
-    colony_city         = models.CharField(max_length=50, blank=True)
-    colony_zipcode      = models.CharField(max_length=10, blank=True)
+    cp_name             = models.CharField(max_length=200, blank=True, null=True)
+    cp_email            = models.CharField(max_length=200, blank=True, null=True)
+    cp_telephone        = models.CharField(max_length=200, blank=True, null=True)
+    colony_address01    = models.CharField(max_length=200, blank=True, null=True)
+    colony_address02    = models.CharField(max_length=200, blank=True, null=True)
+    colony_city         = models.CharField(max_length=50, blank=True, null=True)
+    colony_zipcode      = models.CharField(max_length=10, blank=True, null=True)
     date_sched			= models.DateField(blank =True, null=True)
-    notes_public        = models.TextField("Public Notes", blank=True)
-    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True)
+    notes_public        = models.TextField("Public Notes", blank=True, null=True)
+    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True, null=True)
     application	 		= models.ForeignKey(TNRApplication, blank=True, null=True)
     event				= models.ForeignKey(TNREvent, blank=True, null=True)    
 
     def __str__(self):
-    	return self.cp_name + '/' + self.colony_address01
+    	return self.cp_name
 
 
 
@@ -173,11 +173,11 @@ class Trap(models.Model):
 		(UNKNOWN, 'Unknown'),
 		)
 
-	INTAKE = 'Itk'
-	RELEASED = 'Rel'
-	DECEASED = 'Dec'
-	UNKNOWN = 'Unk'
-	OTHER = 'Oth'
+	INTAKE = 'I'
+	RELEASED = 'R'
+	DECEASED = 'D'
+	UNKNOWN = 'U'
+	OTHER = 'O'
 
 	STATUS_CHOICES = (
 		(INTAKE, 'Intake'),
@@ -187,10 +187,10 @@ class Trap(models.Model):
 		(UNKNOWN, 'Unknown'),
 		)
 
-	status = models.CharField(max_length=3, choices=STATUS_CHOICES, default=UNKNOWN, blank=True, )
-	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN, blank=True, )
-	trap_no	= models.CharField(max_length=20, blank=True, )
-	cat_desc = models.CharField(max_length=100, blank=True, )
+	status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN, blank=True, null=True)
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN, blank=True, null=True )
+	trap_no	= models.CharField(max_length=20, blank=True, null=True )
+	cat_desc = models.CharField(max_length=100, blank=True, null=True )
 	location = models.ForeignKey(TNRLocation, blank=True, null=True, )
 
 
@@ -198,19 +198,19 @@ class Trap(models.Model):
 
 
 class TNRLeg(models.Model):
-    name        = models.CharField(max_length=50, blank=True)
-    date        = models.DateTimeField(blank=True)
+    name        = models.CharField(max_length=50, blank=True, null=True)
+    date        = models.DateTimeField(blank=True, null=True)
 
 
 
 class TNRRole(models.Model):
     leg   = models.ForeignKey(TNRLeg, on_delete=models.CASCADE)
-    name  = models.CharField(max_length=50, blank=True)
+    name  = models.CharField(max_length=50, blank=True, null=True)
 
 
 
 class Person(models.Model):
     role       = models.ForeignKey(TNRRole)
-    first_name = models.CharField(max_length=100, blank=True)
-    last_name  = models.CharField(max_length=100, blank=True)
-    email      = models.CharField(max_length=200, blank=True)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name  = models.CharField(max_length=100, blank=True, null=True)
+    email      = models.CharField(max_length=200, blank=True, null=True)
