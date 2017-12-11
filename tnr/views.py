@@ -12,7 +12,7 @@ def application_upload(request):
 		if form.is_valid():
 			model_instance = form.save(commit=False)
 			model_instance.save()
-			return redirect('https://kittybungalow.org')
+			return redirect('https://www.kittybungalow.org/tnr-application-thank-you')
 	else:
 		form = TNRApplicationModelForm()
 
