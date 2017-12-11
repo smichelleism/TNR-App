@@ -163,35 +163,37 @@ class TNRLocation(models.Model):
 
 
 class Trap(models.Model):
-	FEMALE 	= 'F'
-	MALE 	= 'M'
-	UNKNOWN = 'U'
+    FEMALE 	= 'F'
+    MALE 	= 'M'
+    UNKNOWN = 'U'
 
-	GENDER_CHOICES = (
+    GENDER_CHOICES = (
 		(FEMALE, "Female"),
 		(MALE, "Male"),
 		(UNKNOWN, 'Unknown'),
 		)
 
-	INTAKE = 'I'
-	RELEASED = 'R'
-	DECEASED = 'D'
-	UNKNOWN = 'U'
-	OTHER = 'O'
+    INTAKE = 'I'
+    RELEASED = 'R'
+    DECEASED = 'D'
+    UNKNOWN = 'U'
+    OTHER = 'O'
+    HOMESCHOOL = 'H'
 
-	STATUS_CHOICES = (
-		(INTAKE, 'Intake'),
-		(DECEASED, 'Deceased' ),
-		(RELEASED, 'Released to Colony'),
-		(OTHER, 'Other'),
-		(UNKNOWN, 'Unknown'),
-		)
+    STATUS_CHOICES = (
+        (INTAKE, 'Intake'),
+        (HOMESCHOOL, 'Homeschool'),
+        (DECEASED, 'Deceased' ),
+        (RELEASED, 'Released to Colony'),
+        (OTHER, 'Other'),
+        (UNKNOWN, 'Unknown'),
+        )
 
-	status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN, blank=True, null=True)
-	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN, blank=True, null=True )
-	trap_no	= models.CharField(max_length=20, blank=True, null=True )
-	cat_desc = models.CharField(max_length=100, blank=True, null=True )
-	location = models.ForeignKey(TNRLocation, blank=True, null=True, )
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN, blank=True, null=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN, blank=True, null=True )
+    trap_no	= models.CharField(max_length=20, blank=True, null=True )
+    cat_desc = models.CharField(max_length=100, blank=True, null=True )
+    location = models.ForeignKey(TNRLocation, blank=True, null=True, )
 
 
 
