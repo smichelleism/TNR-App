@@ -8,13 +8,13 @@ from datetime import datetime
 
 
 class TNRApplication(models.Model):
-	BANNED 		= 'Ban'
-	INPROGRESS	= 'Ipr'
-	OUTAREA		= 'Out'
-	CLOSED 		= 'Csd'
-	SELFTRAP 	= 'STr'
-	PENDING		= 'Pnd'
-	NEWCONTACT	= 'NCt'
+	BANNED 		= 'B'
+	INPROGRESS	= 'I'
+	OUTAREA		= 'O'
+	CLOSED 		= 'C'
+	SELFTRAP 	= 'S'
+	PENDING		= 'P'
+	NEWCONTACT	= 'N'
 
 	APP_STATUS_CHOICES	= (
 		(BANNED, "Banned"),
@@ -26,7 +26,7 @@ class TNRApplication(models.Model):
 		(SELFTRAP, "Self Trapping"),
 		)
 
-	app_status 				= models.CharField(max_length = 3, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
+	app_status 				= models.CharField(max_length = 1, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
 	application_date		= models.DateTimeField(default=timezone.now)
 	first_name              = models.CharField(
         verbose_name='What is your first name?', 
@@ -204,13 +204,13 @@ class TNRLeg(models.Model):
 
 
 class TNRRole(models.Model):
-    leg   = models.ForeignKey(TNRLeg, on_delete=models.CASCADE)
+    leg   = models.ForeignKey(TNRLeg, on_delete=models.CASCADE, blank=True, null=True)
     name  = models.CharField(max_length=50, blank=True, null=True)
 
 
 
 class Person(models.Model):
-    role       = models.ForeignKey(TNRRole)
+    role       = models.ForeignKey(TNRRole, blank=True, null=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name  = models.CharField(max_length=100, blank=True, null=True)
     email      = models.CharField(max_length=200, blank=True, null=True)
