@@ -193,6 +193,7 @@ class Trap(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN, blank=True, null=True )
     trap_no	= models.CharField(max_length=20, blank=True, null=True )
     cat_desc = models.CharField(max_length=100, blank=True, null=True )
+    notes = models.CharField(max_length=100, blank=True, null=True)
     location = models.ForeignKey(TNRLocation, blank=True, null=True, )
 
 
