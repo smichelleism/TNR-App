@@ -153,10 +153,10 @@ class TNREvent(models.Model):
     name = models.CharField("Short Description", max_length=50, blank=True, null=True)
     desc = models.CharField("Long Description", max_length=200, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
-    location = models.ForeignKey(TNRLocation, blank=True, null=True)
+    location = models.ManyToManyField(TNRLocation, blank=True, related_name="events")
 
     def __str__(self):
-        return self.name 
+        return (str)(self.date) + " / " + self.name
 
 
 

@@ -23,7 +23,7 @@ class LocationInlineTab(admin.TabularInline):
 	extra = 0
 
 class EventInlineTab(admin.TabularInline):
-	model = TNREvent
+	model = TNRLocation.events.through
 	formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'10'})},
         models.TextField: {'widget': Textarea(attrs={'rows':3, 'cols':40})},
