@@ -41,9 +41,10 @@ class TrapAdmin(admin.ModelAdmin):
 
 @admin.register(TNRLocation)
 class TRNLocationAdmin(admin.ModelAdmin):
-	list_display = ('cp_name', 'cp_telephone', 'cp_email', 'colony_address01', 'colony_zipcode', 'date_sched')
-	list_filter = ['date_sched']
+	list_display = ('cp_name', 'cp_telephone', 'cp_email', 'colony_address01', 'colony_zipcode')
 	inlines = [ EventInlineTab, ]
+	search_fields = ['cp_name', 'colony_address01']
+	list_filter = ['loc_status']
 
 @admin.register(TNRApplication)
 class TNRApplicationAdmin(admin.ModelAdmin):
