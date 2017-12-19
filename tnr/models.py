@@ -154,6 +154,9 @@ class TNRLocation(models.Model):
     def __str__(self):
     	return self.cp_name
 
+    class Meta:
+        ordering = ('cp_name',)
+
 
 
 class TNREvent(models.Model):
@@ -164,6 +167,9 @@ class TNREvent(models.Model):
 
     def __str__(self):
         return (str)(self.date) + " / " + self.name
+
+    class Meta:
+        ordering = ('name',)
 
 
 
@@ -194,10 +200,12 @@ class Trap(models.Model):
         (UNKNOWN, 'Unknown'),
         )
 
+    location =  models.CharField(max_length=50, blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=UNKNOWN, blank=True, null=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=UNKNOWN, blank=True, null=True )
     trap_no	= models.CharField(max_length=20, blank=True, null=True )
     cat_desc = models.CharField(max_length=100, blank=True, null=True )
+    cat_age =   models.CharField(max_length=20, blank=True, null=True)
     notes = models.CharField(max_length=100, blank=True, null=True)
     event = models.ForeignKey(TNREvent, blank=True, null=True, )
 
