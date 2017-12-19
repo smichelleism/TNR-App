@@ -149,7 +149,6 @@ class TNRLocation(models.Model):
     colony_city         = models.CharField(max_length=50, blank=True, null=True)
     colony_zipcode      = models.CharField(max_length=10, blank=True, null=True)
     notes_public        = models.TextField("Public Notes", blank=True, null=True)
-    notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True, null=True)
     application	 		= models.ForeignKey(TNRApplication, blank=True, null=True)  
 
     def __str__(self):
