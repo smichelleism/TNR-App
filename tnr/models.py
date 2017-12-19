@@ -132,6 +132,15 @@ class TNRApplication(models.Model):
 
 
 class TNRLocation(models.Model):
+    OPEN        = 'O'
+    CLOSED      = 'C'
+
+    LOC_STATUS_CHOICES  = (
+        (OPEN, "Open"),
+        (CLOSED, "Closed"),
+        )
+
+    loc_status          = models.CharField(max_length = 1, choices=LOC_STATUS_CHOICES, default=OPEN)
     cp_name             = models.CharField(max_length=200, blank=True, null=True)
     cp_email            = models.CharField(max_length=200, blank=True, null=True)
     cp_telephone        = models.CharField(max_length=200, blank=True, null=True)
@@ -139,7 +148,6 @@ class TNRLocation(models.Model):
     colony_address02    = models.CharField(max_length=200, blank=True, null=True)
     colony_city         = models.CharField(max_length=50, blank=True, null=True)
     colony_zipcode      = models.CharField(max_length=10, blank=True, null=True)
-    date_sched			= models.DateField(blank =True, null=True)
     notes_public        = models.TextField("Public Notes", blank=True, null=True)
     notes_private       = models.TextField("Private Notes. (Not to be shared with CP.)", blank=True, null=True)
     application	 		= models.ForeignKey(TNRApplication, blank=True, null=True)  
