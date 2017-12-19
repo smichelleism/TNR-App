@@ -22,12 +22,17 @@ class LocationInlineTab(admin.TabularInline):
 	model = TNRLocation
 	extra = 0
 
-
+class EventInlineTab(admin.TabularInline):
+	model = TNREvent
+	formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'10'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':3, 'cols':40})},
+    }
 
 @admin.register(TNREvent)
 class TNREventAdmin(admin.ModelAdmin):
 	list_display = ('date', 'name', 'desc')
-	inlines = [LocationInline, ]
+	inlines = [ TrapInline, ]
 
 @admin.register(Trap)
 class TrapAdmin(admin.ModelAdmin):
@@ -38,7 +43,7 @@ class TrapAdmin(admin.ModelAdmin):
 class TRNLocationAdmin(admin.ModelAdmin):
 	list_display = ('cp_name', 'cp_telephone', 'cp_email', 'colony_address01', 'colony_zipcode', 'date_sched')
 	list_filter = ['date_sched']
-	inlines = [ TrapInline, ]
+	inlines = [ EventInlineTab, ]
 
 @admin.register(TNRApplication)
 class TNRApplicationAdmin(admin.ModelAdmin):
