@@ -102,6 +102,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'truancy@kittybungalow.org'
+EMAIL_HOST_PASSWORD = '123tnr456'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
