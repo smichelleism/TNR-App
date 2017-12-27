@@ -13,7 +13,11 @@ def application_upload(request):
 		if form.is_valid():
 			model_instance = form.save(commit=False)
 			model_instance.save()
-			send_mail('<test subject>', '<Hello World>', 'truancy@kittybungalow.org', ['parallaxplace@gmail.com'])
+			try:
+				send_mail('New TNR Application Received', 'A new TRN Application has been received', 'truancy@kittybungalow.org', ['truancy@kittybungalow.org'])
+			except:
+				pass
+				
 			return redirect('https://www.kittybungalow.org/tnr-application-thank-you')
 	else:
 		form = TNRApplicationModelForm()
