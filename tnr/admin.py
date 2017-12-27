@@ -52,7 +52,7 @@ class TNRApplicationAdmin(admin.ModelAdmin):
 		('Initial Application Date',
 			{'fields': [ 'app_status','application_date']}),
 		('Applicant Information',
-			{'fields': ['last_name', 'first_name', 'email', 'contact_phone_cell', 'contact_phone_land', 'contact_street_address', 'contact_city', 'contact_zipcode']}),
+			{'fields': ['last_name', 'first_name', 'email', 'contact_phone_cell', 'contact_phone_land', 'contact_street_address', 'contact_city', 'contact_zipcode', 'occupation']}),
 		('Colony Address',
 			{'fields': ['colony_cross_streets', 'colony_street_address', 'colony_city', 'colony_zipcode']}),
 		('Colony Information',
