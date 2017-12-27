@@ -54,6 +54,9 @@ class TNRApplication(models.Model):
         verbose_name='What is your home zip code?', 
         max_length=10, 
         blank=True, null=True)
+    occupation              = models.CharField(
+        verbose_name='What is your occupation?', 
+        max_length=100)
 	contact_phone_cell		= models.CharField(
         verbose_name='What is your cell phone number?', 
         max_length=20, 
