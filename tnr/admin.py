@@ -62,8 +62,8 @@ class TNRApplicationAdmin(admin.ModelAdmin):
 			{'fields': ['notes']}),
 		]
 
-	list_display = ('application_date', 'app_status', 'first_name', 'last_name', 'colony_street_address', 'cats_total')
+	list_display = ('application_date', 'app_status', 'first_name', 'last_name', 'email', 'contact_phone_cell', 'colony_street_address', 'cats_total')
 	search_fields = ['last_name', 'colony_street_address']
-	list_filter = ['application_date', 'app_status']
+	list_filter = ['app_status', 'application_date']
 	inlines = [LocationInline, ]
 	
