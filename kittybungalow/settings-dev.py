@@ -102,11 +102,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'truancy@kittybungalow.org'
-EMAIL_HOST_PASSWORD = '123tnr456'
+EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+MAILGUN_ACCESS_KEY = 'key-e90dc9abcc95a007b0e2948d0f8092a9'
+MAILGUN_SERVER_NAME = 'sandbox0f2facee275549758b0ea681a348138d.mailgun.org'
+
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.mailgun.org'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'truancy@kittybungalow.org'
+#EMAIL_HOST_PASSWORD = 'nuKk#wmRd8p_{w3d'
 
 
 # Internationalization
