@@ -4,29 +4,51 @@ from datetime import datetime
 
 # Create your models here.
 
+#App-Status
+# - New Contact
+# - In Progress
+# - Pending
+# - Closed
+
+#App-Outcome
+# - Self-trapping
+# - No action taken
+# - Location closed
+# - Out of Area
+# - Banned
 
 
 
 class TNRApplication(models.Model):
-    BANNED 		= 'B'
-    INPROGRESS	= 'I'
-    OUTAREA		= 'O'
-    CLOSED 		= 'C'
-    SELFTRAP 	= 'S'
-    PENDING		= 'P'
-    NEWCONTACT	= 'N'
+    INPROGRESS	= 'In Progress'
+    CLOSED 		= 'Closed'
+    PENDING		= 'Pending'
+    NEWCONTACT	= 'New Contact'
+
+
+    OUTAREA     = 'Out of Area'
+    BANNED      = 'Banned'
+    SELFTRAP    = 'Self-Trapping'
+    NOACTION    = 'No Action'
+    LOCCLOSED   = 'Location Closed'
 
     APP_STATUS_CHOICES	= (
-		(BANNED, "Banned"),
 		(CLOSED, "Closed"),
 		(INPROGRESS, "In Progress"),
 		(NEWCONTACT, "New Contact"),
-		(OUTAREA, "Out of Area"),
 		(PENDING, "Pending"),
-		(SELFTRAP, "Self Trapping"),
 		)
 
-    app_status 				= models.CharField(max_length = 1, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
+    OUTCOME_STATUS_CHOICES  = (
+        (BANNED, "Banned"),
+        (NOACTION, "Closed-No Action"),
+        (LOCCLOSED, "Location Closed"),
+        (OUTAREA, "Out of Area"),
+        (SELFTRAP, "Self Trapping"),
+        )
+
+    app_status 				= models.CharField(max_length = 15, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
+    outcome_status          = models.CharField(max_length = 20, choices=OUTCOME_STATUS_CHOICES, blank=True, null=True)
     application_date		= models.DateTimeField(default=timezone.now)
     first_name              = models.CharField(
         verbose_name='What is your first name?', 

@@ -50,7 +50,7 @@ class TRNLocationAdmin(admin.ModelAdmin):
 class TNRApplicationAdmin(admin.ModelAdmin):
 	fieldsets = [
 		('Initial Application Date',
-			{'fields': [ 'app_status','application_date']}),
+			{'fields': [ 'app_status', 'outcome_status', 'application_date']}),
 		('Applicant Information',
 			{'fields': ['last_name', 'first_name', 'email', 'contact_phone_cell', 'contact_phone_land', 'contact_street_address', 'contact_city', 'contact_zipcode', 'occupation']}),
 		('Colony Address',
@@ -62,8 +62,8 @@ class TNRApplicationAdmin(admin.ModelAdmin):
 			{'fields': ['notes']}),
 		]
 
-	list_display = ('application_date', 'app_status', 'first_name', 'last_name', 'email', 'contact_phone_cell', 'colony_street_address', 'cats_total')
+	list_display = ('application_date', 'app_status', 'outcome_status', 'first_name', 'last_name', 'email', 'contact_phone_cell', 'colony_street_address', 'cats_total')
 	search_fields = ['last_name', 'colony_street_address']
-	list_filter = ['app_status', 'application_date']
+	list_filter = ['app_status', 'outcome_status', 'application_date']
 	inlines = [LocationInline, ]
 	
