@@ -2,10 +2,33 @@
 <html>
 <head>
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script>
+                $(function() {
+                        $( "#id_date_found" ).datepicker({
+                                dateFormat: "yy-mm-dd",
+                                defaultDate: "+1w",
+                                changeMonth: true,
+                                numberOfMonths: 1,
+                                onClose: function( selectedDate ) {
+                                        $( "#id_date_found" ).datepicker( "option", "minDate", selectedDate );
+                                }
+                        });
+                });
+        </script>
 </head>
 <body>
 
+<div class="header"><img height='100px' style='float: right;' src="{% static 'images/kblogo.png' %}">
+<h1>Kitty Bungalow Charm School for Wayward Cats</h1>
+<h2>TNR Application</h2>
+</div>
 
+<p>Please complete this application for TNR Services. All fields are required.</p>
+
+<p><img style='float: right;' src="{% static 'images/beautycat.jpg' %}"> Kitty Bungalow is a non-profit, donation-driven organization with limited grant funding. We provide and encourage our services at no cost to low income Community Partners in the city of Los Angeles. Please understand we are a small organization and we will try to assist you in any way we can. However, our services are not guaranteed. Any donations are appreciated and can be sent via PayPal to kittybungalow@gmail.com.</p>
 
 <form method="POST">
 	{% csrf_token %}

@@ -13,6 +13,7 @@ class TNRApplicationModelForm(forms.ModelForm):
 			'contact_phone_cell', 
 			'contact_phone_land', 
 			'occupation',
+			'hh_income',
 			'colony_street_address',
 			'colony_cross_streets',
 			'colony_city',

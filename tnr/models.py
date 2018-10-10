@@ -25,12 +25,25 @@ class TNRApplication(models.Model):
     PENDING		= 'Pending'
     NEWCONTACT	= 'New Contact'
 
+    LEVEL24 = '24'
+    LEVEL35 = '35'
+    LEVEL65 = '65'
+    LEVEL99 = '99'
 
     OUTAREA     = 'Out of Area'
     BANNED      = 'Banned'
     SELFTRAP    = 'Self-Trapping'
     NOACTION    = 'No Action'
     LOCCLOSED   = 'Location Closed'
+    SCHEDULED   = 'Scheduled'
+    FLYER       = 'Needs Flyering'
+
+    HH_INCOME_CHOICES   = (
+        (LEVEL24, "Below 24,000"),
+        (LEVEL35, "Between 24,000 and 35,000"),
+        (LEVEL65, "Between 35,000 and 65,000"),
+        (LEVEL99, "Above 65,000"),
+        )
 
     APP_STATUS_CHOICES	= (
 		(CLOSED, "Closed"),
@@ -45,6 +58,8 @@ class TNRApplication(models.Model):
         (LOCCLOSED, "Location Closed"),
         (OUTAREA, "Out of Area"),
         (SELFTRAP, "Self Trapping"),
+        (SCHEDULED, 'Scheduled'),
+        (FLYER, 'Needs Flyering'),
         )
 
     app_status 				= models.CharField(max_length = 15, choices=APP_STATUS_CHOICES, default=NEWCONTACT)
@@ -79,6 +94,11 @@ class TNRApplication(models.Model):
     occupation              = models.CharField(
         verbose_name='What is your occupation?', 
         max_length=100, 
+        blank=True, null=True)
+    hh_income               = models.CharField(
+        verbose_name='What is your household income?',
+        max_length = 2, 
+        choices=HH_INCOME_CHOICES, 
         blank=True, null=True)
     contact_phone_cell		= models.CharField(
         verbose_name='What is your cell phone number?', 
@@ -137,7 +157,7 @@ class TNRApplication(models.Model):
         max_length=100, 
         blank=True, null=True)
     cats_feeding            = models.CharField(
-        verbose_name='Who feeds the cats? What time are they normally fed (morning/evening)?', 
+        verbose_name='Who feeds the cats? What time are they normally fed? Morning/evening? What time?', 
         max_length=200, 
         blank=True, null=True)
     scheduling_issues       = models.CharField(
@@ -189,7 +209,7 @@ class TNREvent(models.Model):
     name = models.CharField("Short Description", max_length=50, blank=True, null=True)
     desc = models.CharField("Long Description", max_length=200, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
-    location = models.ManyToManyField(TNRLocation, blank=True, related_name="events")
+#    location = models.ManyToManyField(TNRLocation, blank=True, related_name="events")
 
     def __str__(self):
         return (str)(self.date) + " / " + self.name

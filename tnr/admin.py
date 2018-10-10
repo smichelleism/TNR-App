@@ -22,12 +22,12 @@ class LocationInlineTab(admin.TabularInline):
 	model = TNRLocation
 	extra = 0
 
-class EventInlineTab(admin.TabularInline):
-	model = TNRLocation.events.through
-	formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size':'10'})},
-        models.TextField: {'widget': Textarea(attrs={'rows':3, 'cols':40})},
-    }
+# class EventInlineTab(admin.TabularInline):
+#	model = TNRLocation.events.through
+#	formfield_overrides = {
+#        models.CharField: {'widget': TextInput(attrs={'size':'10'})},
+#        models.TextField: {'widget': Textarea(attrs={'rows':3, 'cols':40})},
+#    }
 
 @admin.register(TNREvent)
 class TNREventAdmin(admin.ModelAdmin):
@@ -42,7 +42,7 @@ class TrapAdmin(admin.ModelAdmin):
 @admin.register(TNRLocation)
 class TRNLocationAdmin(admin.ModelAdmin):
 	list_display = ('cp_name', 'cp_telephone', 'cp_email', 'colony_address01', 'colony_zipcode')
-	inlines = [ EventInlineTab, ]
+#	inlines = [ EventInlineTab, ]
 	search_fields = ['cp_name', 'colony_address01']
 	list_filter = ['loc_status']
 
@@ -52,7 +52,7 @@ class TNRApplicationAdmin(admin.ModelAdmin):
 		('Initial Application Date',
 			{'fields': [ 'app_status', 'outcome_status', 'application_date']}),
 		('Applicant Information',
-			{'fields': ['last_name', 'first_name', 'email', 'contact_phone_cell', 'contact_phone_land', 'contact_street_address', 'contact_city', 'contact_zipcode', 'occupation']}),
+			{'fields': ['last_name', 'first_name', 'email', 'contact_phone_cell', 'contact_phone_land', 'contact_street_address', 'contact_city', 'contact_zipcode', 'occupation', 'hh_income']}),
 		('Colony Address',
 			{'fields': ['colony_cross_streets', 'colony_street_address', 'colony_city', 'colony_zipcode']}),
 		('Colony Information',
@@ -63,7 +63,7 @@ class TNRApplicationAdmin(admin.ModelAdmin):
 		]
 
 	list_display = ('application_date', 'app_status', 'outcome_status', 'first_name', 'last_name', 'email', 'contact_phone_cell', 'colony_street_address', 'cats_total')
-	search_fields = ['last_name', 'colony_street_address']
+	search_fields = ['last_name', 'first_name', 'email', 'colony_street_address']
 	list_filter = ['app_status', 'outcome_status', 'application_date']
 	inlines = [LocationInline, ]
 	
